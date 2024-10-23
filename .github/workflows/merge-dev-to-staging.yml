@@ -3,7 +3,7 @@ name: merge dev to staging
 on:
     push:
         branches:
-            - dev
+            - main
 
 jobs:
     auto-merge:
@@ -17,10 +17,10 @@ jobs:
               git config --global user.name "bpbartholomeusz"
               git config --global user.email "brian.bartholomeusz@bcstechnology.com.au"
 
-          - name: Push changes to staging when dev is updated
-            if: github.ref == 'refs/heads/dev'
+          - name: Push changes to staging when main is updated
+            if: github.ref == 'refs/heads/main'
             run: |
                 git fetch origin
                 git checkout staging
-                git merge dev
+                git merge main
                 git push origin staging
