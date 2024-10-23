@@ -1,0 +1,28 @@
+name: merge dev to staging
+
+on:
+    push:
+        branches:
+            - dev
+
+jobs:
+    branch-sync:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout Repository
+            uses: actions/checkout@v4
+            with:
+                fetch-depth: 0
+
+          - name: Set up Git for GitHub Actions
+            run: |
+              git config --global user.name "bpbartholomeusz"
+              git config --global user.email "brian.bartholomeusz@bcstechnology.com.au"
+
+          - name: Push changes to staging when dev is updated
+            if: github.ref == 'refs/heads/dev'
+            run: |
+                git fetch origin
+                git checkout staging
+                git merge dev
+                git push origin staging
