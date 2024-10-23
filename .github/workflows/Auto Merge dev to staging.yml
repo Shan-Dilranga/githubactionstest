@@ -11,13 +11,13 @@ jobs:
     steps:
     # Checkout the repository
     - name: Checkout Repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     # Set up Git user credentials
     - name: Set up Git for GitHub Actions
       run: |
-        git config user.name "bpbartholomeusz"
-        git config user.email "brian.bartholomeusz@bcstechnology.com.au"
+        git config --global user.name "bpbartholomeusz"
+        git config --global user.email "brian.bartholomeusz@bcstechnology.com.au"
 
     # Fetch all branches
     - name: Fetch all branches
@@ -29,7 +29,7 @@ jobs:
 
     # Merge dev into staging
     - name: Merge dev into staging
-      run: git merge dev --no-ff
+      run: git merge dev
 
     # Push the merged changes to the staging branch
     - name: Push changes to staging
