@@ -1,0 +1,41 @@
+name: Auto Merge dev to staging
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    steps:
+    # Checkout the repository
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    # Set up Git user credentials
+    - name: Set up Git for GitHub Actions
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+
+    # Fetch all branches
+    - name: Fetch all branches
+      run: git fetch origin
+
+    # Checkout the staging branch
+    - name: Checkout staging branch
+      run: git checkout staging
+
+    # Merge dev into staging
+    - name: Merge dev into staging
+      run: git merge dev --no-ff
+
+    # Push the merged changes to the staging branch
+    - name: Push changes to staging
+      run: git push origin staging
+
+    # Optional: Add a step to notify about the merge success
+    - name: Notify merge success
+      if: success()
+      run: echo "Successfully merged dev into staging"
