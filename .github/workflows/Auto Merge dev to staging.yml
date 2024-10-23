@@ -23,16 +23,17 @@ jobs:
     - name: Fetch all branches
       run: git fetch origin
 
-    # Checkout the staging branch
+    # Checkout the latest staging branch
     - name: Checkout staging branch
-      run: git checkout staging
+      run: git checkout -B staging origin/staging
 
     # Merge dev into staging
     - name: Merge dev into staging
-      run: git merge dev
+      run: git merge dev || echo "Merge conflicts occurred"
 
     # Push the merged changes to the staging branch
     - name: Push changes to staging
+      if: success() && github.event_name == 'push'
       run: git push origin staging
 
     # Optional: Add a step to notify about the merge success
