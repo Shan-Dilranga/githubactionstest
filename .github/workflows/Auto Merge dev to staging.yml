@@ -16,8 +16,8 @@ jobs:
     # Set up Git user credentials
     - name: Set up Git for GitHub Actions
       run: |
-        git config user.name "github-actions[bot]"
-        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git config user.name "bpbartholomeusz"
+        git config user.email "brian.bartholomeusz@bcstechnology.com.au"
 
     # Fetch all branches
     - name: Fetch all branches
