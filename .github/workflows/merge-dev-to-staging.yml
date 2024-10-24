@@ -19,7 +19,7 @@ jobs:
               git config --global user.name "bpbartholomeusz"
               git config --global user.email "brian.bartholomeusz@bcstechnology.com.au"
 
-          - name: Push changes to staging when dev is updated
+          - name: Push changes to staging when main is updated
             if: github.ref == 'refs/heads/main'
             run: |
                 git fetch origin
