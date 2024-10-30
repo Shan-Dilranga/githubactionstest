@@ -1,0 +1,28 @@
+name: merge main to staging
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    branch-sync:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout Repository
+            uses: actions/checkout@v4
+            with:
+                fetch-depth: 0
+
+          - name: Set up Git for GitHub Actions
+            run: |
+              git config --global user.name "Shan-Dilranga"
+              git config --global user.email "2019cs187@stu.ucsc.lk"
+
+          - name: Push changes to staging when main is updated
+            if: github.ref == 'refs/heads/main'
+            run: |
+                git fetch origin
+                git checkout staging
+                git merge main
+                git push origin staging
