@@ -21,6 +21,6 @@ int main(){
         printf("result no %d is : %d\n",i+1,resultarr[i] );
     }
     
-
+    printf("Github connection checking\n");
     return 0;
 }
